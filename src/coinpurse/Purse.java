@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-//TODO import List, ArrayList, and Collections
-// You will use Collections.sort() to sort the coins
+
 
 /**
  * A coin purse contains coins. You can insert coins, withdraw money, check the
@@ -81,7 +80,7 @@ public class Purse {
 	 */
 	public boolean isFull() {
 
-		if (count() >= capacity) {
+		if (count() >= this.capacity) {
 			return true;
 		}
 		return false;
@@ -97,7 +96,7 @@ public class Purse {
 	 * @return true if coin inserted, false if can't insert
 	 */
 	public boolean insert(Coin coin) {
-		if (!isFull() || coin.getValue() >= 0) {
+		if (!isFull() || coin.getValue() > 0) {
 			money.add(coin);
 			return true;
 		}
@@ -116,7 +115,7 @@ public class Purse {
 	 *         withdraw requested amount.
 	 */
 	public Coin[] withdraw(double amount) {
-		
+
 		if (amount < 0 || amount > getBalance()) {
 			return null;
 		}
@@ -136,7 +135,7 @@ public class Purse {
 		List<Coin> temp = new ArrayList<Coin>();
 		for (int i = 0; i < money.size(); i++) {
 			if (money.get(i).getValue() <= amountNeededToWithdraw) {
-				amountNeededToWithdraw -=money.get(i).getValue();
+				amountNeededToWithdraw -= money.get(i).getValue();
 				temp.add(money.get(i));
 
 			}
@@ -156,10 +155,11 @@ public class Purse {
 		// and return them as an array.
 		// Use list.toArray( array[] ) to copy a list into an array.
 		// toArray returns a reference to the array itself.
-
-		for (Coin coin : temp) {
-			temp.remove(coin);
-		}
+		
+			for (Coin coin : temp) {
+				money.remove(coin);
+			}
+		
 
 		Coin[] array = new Coin[temp.size()];
 		return temp.toArray(array);
@@ -174,4 +174,3 @@ public class Purse {
 	}
 
 }
-
