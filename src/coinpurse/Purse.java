@@ -96,7 +96,7 @@ public class Purse {
 	 * @return true if coin inserted, false if can't insert
 	 */
 	public boolean insert(Coin coin) {
-		if (!isFull() || coin.getValue() > 0) {
+		if (!isFull() && coin.getValue() > 0) {
 			money.add(coin);
 			return true;
 		}
@@ -132,14 +132,16 @@ public class Purse {
 		 */
 		double amountNeededToWithdraw = amount;
 		Collections.sort(money);
+		Collections.reverse(money);
 		List<Coin> temp = new ArrayList<Coin>();
-		for (int i = 0; i < money.size(); i++) {
-			if (money.get(i).getValue() <= amountNeededToWithdraw) {
-				amountNeededToWithdraw -= money.get(i).getValue();
-				temp.add(money.get(i));
-
+		
+		for (Coin coin : money) {
+			if( coin.getValue() <= amountNeededToWithdraw){
+				amountNeededToWithdraw -= coin.getValue();
+				temp.add(coin);
 			}
 		}
+
 		// Did we get the full amount?
 		// This code assumes you decrease amount each time you remove a coin.
 		// Your code might use some other variable for the remaining amount to
