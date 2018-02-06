@@ -52,13 +52,14 @@ public class MoneyUtil {
 	
 	public static void main(String[] args) {
 		
-		List<Valuable> coins = new ArrayList<Valuable>();
-		coins.add(new Coin (30.0,"Bath"));
-		coins.add(new Coin (30.0,"pound"));
-		coins.add(new Coin (1.0,"Bath"));
-		coins.add(new Coin (0.5,"Bath"));
-		printCoin( coins );
-		sortCoins(coins);
+		List<Valuable> valueable = new ArrayList<Valuable>();
+		valueable.add(new Coin (30.0,"Bath"));
+		valueable.add(new Coin (30.0,"pound"));
+		valueable.add(new Coin (1.0,"Bath"));
+		valueable.add(new Coin (0.5,"Bath"));
+		valueable.add(new BankNote (30.0,"Bath"));
+		printCoin( valueable );
+		sortCoins(valueable);
 		
 	
 		
