@@ -148,7 +148,7 @@ public class Purse {
 	 * return whatever is a useful description.
 	 */
 	public String toString() {
-		return String.format("%d coins with value %.1f", count(), getBalance());
+		return String.format("%d money with value %.1f", count(), getBalance());
 	}
 
 }
