@@ -15,7 +15,7 @@ public class Purse {
 	/** Collection of objects in the purse. */
 
 	private List<Valuable> money;
-	Valuable[] array = new Valuable[20];
+//	Valuable[] array = new Valuable[20];
 
 	/**
 	 * Capacity is maximum number of items the purse can hold. Capacity is set
@@ -110,9 +110,9 @@ public class Purse {
 	 * @return array of Coin objects for money withdrawn, or null if cannot
 	 *         withdraw requested amount.
 	 */
+	Comparator<Valuable> comp = new ValueComparator();
+	//แก้?
 	public Valuable[] withdraw(double amount) {
-		Comparator<Valuable> comp = new ValueComparator();
-
 		if (amount < 0 || amount > getBalance()) {
 			return null;
 		}

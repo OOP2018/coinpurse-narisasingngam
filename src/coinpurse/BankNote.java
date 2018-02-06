@@ -1,28 +1,52 @@
 package coinpurse;
 
+/**
+ * Each BankNote has a different serial number.
+ * @author narissingngam
+ *
+ */
+
 public class BankNote implements Valuable {
-	
+
 	private double value;
 	private String currency;
 	private long nextSerialNumber = 1000000;
 	private long serialNumber; 
 	
+	/**
+	 * Initialize a value and currency
+	 * @param value 
+	 * @param currency
+	 */
 	public BankNote( double value ,String currency){
 		this.value = value;
 		this.currency = currency;
 		this.serialNumber = nextSerialNumber++;
 	}
 
+	/**
+	 * get value in BankNote
+	 * @return value
+	 */
 	@Override
 	public double getValue() {
 		return value;
 	}
 
+	/**
+	 * get currency in BankNote
+	 * @return currency
+	 */
 	@Override
 	public String getCurrency() {
 		return currency;
 	}
-	public long getserialNumber(){
+	
+	/**
+	 * get serialNumber in BankNote
+	 * @return serialNumber
+	 */
+	public long getSerial(){
 		return serialNumber;
 	}
 	/**
@@ -50,7 +74,8 @@ public class BankNote implements Valuable {
 	}
 	
 	public String toStirng(){
-		return value+ "-" + currency +"note [ " + serialNumber + " ]";
+		return String.format("%.0f - %s note [%d]" , value,currency,serialNumber);
+				
 	}
 	
 

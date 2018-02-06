@@ -64,24 +64,6 @@ public class Coin implements Valuable {
 		return true;
 	}
 
-	/**
-	 * Compare the value of coin
-	 * @param coin is the object 
-	 * @return -1 if the first less than the second
-	 * @return 1 if the first more than the second
-	 * @return 0 if it the same value
-	 */
-	public int compareTo(Coin coin) {
-		if (this.getValue() < coin.getValue()) {
-			return -1;
-		} else if (this.getValue() > coin.getValue()) {
-			return 1;
-		} else {
-			return 0;
-		}
-
-	}
-
 	@Override
 	public String toString() {
 		return value + "-" + currency;
