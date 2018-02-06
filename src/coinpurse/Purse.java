@@ -111,7 +111,7 @@ public class Purse {
 	 *         withdraw requested amount.
 	 */
 	Comparator<Valuable> comp = new ValueComparator();
-	//แก้?
+	//fix
 	public Valuable[] withdraw(double amount) {
 		if (amount < 0 || amount > getBalance()) {
 			return null;
