@@ -8,6 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.sun.media.jfxmedia.events.MarkerEvent;
+
 /**
  * Test the Purse using JUnit.
  * This is a JUnit 4 test suite.  
@@ -38,6 +40,47 @@ public class PurseTest {
     private Coin makeCoin(double value) {
 		return new Coin(value,CURRENCY);
 	}
+    
+    /** Make a banknote with the default currency. To save typing "new BankNote(...)" */
+    private BankNote makeBank(double value){
+    	return new BankNote(value,CURRENCY);
+    }
+    
+    
+    /**test for BankNote*/
+    @Test
+    public void testBankNote(){
+    	Purse purse = new Purse(4);
+    	BankNote bank1 = makeBank(20);
+    	BankNote bank2 = makeBank(50);
+    	BankNote bank3 =  makeBank(20);
+    	BankNote bank4 = makeBank(100);
+    	//testEqual
+    	assertFalse(bank1.equals(bank4));
+    	assertTrue(bank3.equals(bank1));
+    	//testInsert
+    	assertTrue(purse.insert(bank3));
+    	assertTrue(purse.insert(bank4));
+    	assertEquals(2, purse.count());
+    	//testgetBalance()
+    	assertEquals(120,purse.getBalance(),TOL);
+    	//testWithdraw
+    	Purse purse2 = new Purse(5);
+		double [] values = {20, 20,50, 100}; // values of Banknote we will insert
+		
+		for(double value : values) {
+			Valuable bankN = makeBank(value);
+			assertTrue(purse2.insert(bankN));
+			assertEquals(value, purse2.getBalance(), TOL);
+			Valuable [] result = purse2.withdraw(value);
+			assertTrue( result != null );
+			assertEquals( 1, result.length );
+			assertSame(  bankN, result[0] ); // should be same object
+			assertEquals( 0, purse2.getBalance(), TOL );
+		}
+    	
+    	
+    }
 
     /** Easy test that the Purse constructor is working. */
     @Test
