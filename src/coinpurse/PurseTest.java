@@ -92,7 +92,7 @@ public class PurseTest {
         assertEquals(0, purse.count());
     }
 /**
- * 
+ * Test withdraw with currency.
  */
     @Test(timeout=1000)
     public void testWithdrawWithCurrency(){
@@ -112,6 +112,22 @@ public class PurseTest {
     	assertEquals(75, purse.getBalance(),TOL);
     	purse.withdraw(new Money(20,"pound"));
     	assertEquals(55, purse.getBalance(),TOL);
+    }
+    /**
+     * test Equal
+     */
+    @Test
+    public void testEqualwithCurrency(){
+    	
+    	
+    	Coin coin1 = new Coin(10,"Baht");
+    	Coin coin2 = new Coin(10,"pound");
+    	Coin coin3 = new Coin(10,"Baht");
+    	
+    	assertFalse(coin1.equals(coin2));
+    	assertTrue(coin1.equals(coin3));
+    	
+    	
     }
     
 

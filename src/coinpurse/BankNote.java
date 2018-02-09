@@ -2,7 +2,7 @@ package coinpurse;
 
 /**
  * Each BankNote has a different serial number.
- * @author narissingngam
+ * @author Narisa singngam
  *
  */
 
