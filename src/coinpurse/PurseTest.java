@@ -25,7 +25,7 @@ import com.sun.media.jfxmedia.events.MarkerEvent;
 public class PurseTest {
 	/** tolerance for comparing two double values */
 	private static final double TOL = 1.0E-6;
-	private static final String CURRENCY = "BTC";
+	private static final String CURRENCY = "Baht";
 	
     /**
      * Sets up the test fixture.
@@ -91,7 +91,28 @@ public class PurseTest {
         assertEquals(false, purse.isFull());
         assertEquals(0, purse.count());
     }
-
+/**
+ * 
+ */
+    @Test(timeout=1000)
+    public void testWithdrawWithCurrency(){
+    	Purse purse = new Purse(5);
+    	Coin coin1 = new Coin(10,"Baht");
+    	Coin coin2 = new Coin(5,"pound");
+    	Coin coin3 = new Coin(3,"Baht");
+    	BankNote note1 = new BankNote(20,"pound");
+    	BankNote note2 = new BankNote(50,"Baht");
+  
+    	purse.insert(coin1);
+    	purse.insert(coin2);
+    	purse.insert(coin3);
+    	purse.insert(note1);
+    	purse.insert(note2);
+    	purse.withdraw(new Money(13,"Baht"));
+    	assertEquals(75, purse.getBalance(),TOL);
+    	purse.withdraw(new Money(20,"pound"));
+    	assertEquals(55, purse.getBalance(),TOL);
+    }
     
 
     /** Insert some coins. Easy test. */

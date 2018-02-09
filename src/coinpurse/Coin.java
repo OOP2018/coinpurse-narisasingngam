@@ -7,66 +7,20 @@ package coinpurse;
  *
  */
 
-public class Coin implements Valuable {
-	/** The value of money */
-	private double value;
-	/** The currency of money */
-	private String currency;
-
+public class Coin extends Money  {
 	/**
 	 * Initialize a value and currency
 	 * @param value 
 	 * @param currency
 	 */
 	public Coin(double value, String currency) {
-		if (value >= 0) {
-			this.value = value;
-		}
-		this.currency = currency;
+		super(value,currency);
 	}
 
-	/**
-	 * get value in coin
-	 * @return value
-	 */
-	public double getValue() {
-		return value;
-	}
-
-	/**
-	 * get currency in coin
-	 * @return currency
-	 */
-	public String getCurrency() {
-		return currency;
-	}
-
-	/**
-	 * check the value and currency 
-	 * @param arg 
-	 * @return true if it equal
-	 */
-	@Override
-	public boolean equals(Object arg) {
-		if (arg == null) {
-			return false;
-		}
-		if (this.getClass() != arg.getClass()) {
-			return false;
-		}
-		Coin other = (Coin) arg;
-		if (this.getValue() != other.getValue()) {
-			return false;
-		}
-		if (!this.getCurrency().equals(other.getCurrency())) {
-			return false;
-		}
-		return true;
-	}
 
 	@Override
 	public String toString() {
-		return value + "-" + currency;
+		return this.getValue() + "-" + this.getCurrency();
 	}
 
 }

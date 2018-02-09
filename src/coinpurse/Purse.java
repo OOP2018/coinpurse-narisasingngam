@@ -15,7 +15,7 @@ public class Purse {
 	/** Collection of objects in the purse. */
 
 	private List<Valuable> money;
-//	Valuable[] array = new Valuable[20];
+	private Comparator<Valuable> comp = new ValueComparator();
 
 	/**
 	 * Capacity is maximum number of items the purse can hold. Capacity is set
@@ -32,7 +32,6 @@ public class Purse {
 	public Purse(int capacity) {
 		this.capacity = capacity;
 		money = new ArrayList<Valuable>(capacity);
-
 	}
 
 	/**
@@ -64,7 +63,6 @@ public class Purse {
 	 * @return the capacity
 	 */
 	public int getCapacity() {
-
 		return capacity;
 	}
 
@@ -80,7 +78,6 @@ public class Purse {
 			return true;
 		}
 		return false;
-
 	}
 
 	/**
@@ -101,46 +98,58 @@ public class Purse {
 	}
 
 	/**
-	 * Withdraw the requested amount of money. Return an array of Coins
-	 * withdrawn from purse, or return null if cannot withdraw the amount
-	 * requested.
+	 * Withdraw the amount, using only items that have the same currency as the parameter(amount).
+	 * amount must not be null and amount.
 	 * 
 	 * @param amount
 	 *            is the amount to withdraw
 	 * @return array of Coin objects for money withdrawn, or null if cannot
 	 *         withdraw requested amount.
 	 */
-	Comparator<Valuable> comp = new ValueComparator();
-	//fix
-	public Valuable[] withdraw(double amount) {
-		if (amount < 0 || amount > getBalance()) {
-			return null;
-		}
-
-		double amountNeededToWithdraw = amount;
+	
+	public Valuable[] withdraw(Valuable amount) {
+		double amountV = amount.getValue();
+		if (amountV < 0 || amountV > getBalance()) return null;
+		
 		Collections.sort(money,comp);
 		Collections.reverse(money);
 		List<Valuable> temp = new ArrayList<Valuable>();
+		
+		List<Valuable> tempCurrency = new ArrayList<Valuable>();
+		for(Valuable v : money){
+			if(v.getCurrency().equals(amount.getCurrency())){
+				tempCurrency.add(v);
+			}
+		}
 
-		for (Valuable value : money) {
-			if (value.getValue() <= amountNeededToWithdraw) {
-				amountNeededToWithdraw -= value.getValue();
+		for (Valuable value : tempCurrency) {
+			if (value.getValue() <= amountV) {
+				amountV -= value.getValue();
 				temp.add(value);
 			}
 		}
 
-		if (amountNeededToWithdraw != 0) {
+		if (amountV != 0) return null;
 
-			return null;
-
-		}
-
-		for (Valuable value : temp) {
-			money.remove(value);
-		}
+		for (Valuable value : temp) money.remove(value);
+		
 
 		Valuable[] array = new Valuable[temp.size()];
 		return temp.toArray(array);
+	}
+	
+	/**
+	 * Withdraw amount using the default currency, which is "Bath".
+	 * 
+	 * @param amount
+	 *            is the amount to withdraw
+	 * @return array of Coin objects for money withdrawn, or null if cannot
+	 *         withdraw requested amount.
+	 */
+	public Valuable[] withdraw(double amount) {
+		Money moneyA = new Money(amount,"Baht");
+		return withdraw(moneyA);
+		
 	}
 
 	/**
