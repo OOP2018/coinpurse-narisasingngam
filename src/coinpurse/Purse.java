@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * A coin purse contains coins. You can insert coins, withdraw money, check the
+ * A  purse contains List of Valuable. You can insert money, withdraw money, check the
  * balance, and check if the purse is full.
  * 
  * @author Narisa Singngam
@@ -27,7 +27,7 @@ public class Purse {
 	 * Create a purse with a specified capacity.
 	 * 
 	 * @param capacity
-	 *            is maximum number of coins you can put in purse.
+	 *            is maximum number of Money you can put in purse.
 	 */
 	public Purse(int capacity) {
 		this.capacity = capacity;
@@ -36,9 +36,9 @@ public class Purse {
 
 	/**
 	 * Count and return the number of coins in the purse. This is the number of
-	 * coins, not their value.
+	 * money, not their value.
 	 * 
-	 * @return the number of coins in the purse
+	 * @return the number of money in the purse
 	 */
 	public int count() {
 		return money.size();
@@ -58,7 +58,7 @@ public class Purse {
 	}
 
 	/**
-	 * Return the capacity of the coin purse.
+	 * Return the capacity of the purse.
 	 * 
 	 * @return the capacity
 	 */
@@ -81,11 +81,11 @@ public class Purse {
 	}
 
 	/**
-	 * Insert a coin into the purse. The coin is only inserted if the purse has
-	 * space for it and the coin has positive value. No worthless coins!
+	 * Insert a value into the purse. The value is only inserted if the purse has
+	 * space for it and the value has positive value. No worthless coins!
 	 * 
-	 * @param coin
-	 *            is a Coin object to insert into purse
+	 * @param value
+	 *            is a Valuable object to insert into purse
 	 * @return true if coin inserted, false if can't insert
 	 */
 	public boolean insert(Valuable value) {
@@ -103,7 +103,7 @@ public class Purse {
 	 * 
 	 * @param amount
 	 *            is the amount to withdraw
-	 * @return array of Coin objects for money withdrawn, or null if cannot
+	 * @return array of Money objects for money withdrawn, or null if cannot
 	 *         withdraw requested amount.
 	 */
 	
@@ -143,7 +143,7 @@ public class Purse {
 	 * 
 	 * @param amount
 	 *            is the amount to withdraw
-	 * @return array of Coin objects for money withdrawn, or null if cannot
+	 * @return array of Money objects for money withdrawn, or null if cannot
 	 *         withdraw requested amount.
 	 */
 	public Valuable[] withdraw(double amount) {

@@ -118,8 +118,7 @@ public class PurseTest {
      */
     @Test
     public void testEqualwithCurrency(){
-    	
-    	
+
     	Coin coin1 = new Coin(10,"Baht");
     	Coin coin2 = new Coin(10,"pound");
     	Coin coin3 = new Coin(10,"Baht");

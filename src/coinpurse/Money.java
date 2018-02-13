@@ -1,7 +1,7 @@
 package coinpurse;
 
 /**
- * 
+ * Money class  interface to Valuable that have attribute value and currency.
  * @author Narisa Singngam
  *
  */
