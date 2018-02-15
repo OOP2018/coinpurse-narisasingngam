@@ -109,6 +109,7 @@ public class Purse {
 	
 	public Valuable[] withdraw(Valuable amount) {
 		double amountV = amount.getValue();
+		if(amount == null) return null;
 		if (amountV < 0 || amountV > getBalance()) return null;
 		
 		Collections.sort(money,comp);
