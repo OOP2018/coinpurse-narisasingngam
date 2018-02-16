@@ -26,6 +26,7 @@ public class PurseTest {
 	/** tolerance for comparing two double values */
 	private static final double TOL = 1.0E-6;
 	private static final String CURRENCY = "Baht";
+	private long serialNumber = 1000000;
 	
     /**
      * Sets up the test fixture.
@@ -43,7 +44,7 @@ public class PurseTest {
     
     /** Make a banknote with the default currency. To save typing "new BankNote(...)" */
     private BankNote makeBank(double value){
-    	return new BankNote(value,CURRENCY);
+    	return new BankNote(value,CURRENCY,serialNumber);
     }
     
     
@@ -100,8 +101,8 @@ public class PurseTest {
     	Coin coin1 = new Coin(10,"Baht");
     	Coin coin2 = new Coin(5,"pound");
     	Coin coin3 = new Coin(3,"Baht");
-    	BankNote note1 = new BankNote(20,"pound");
-    	BankNote note2 = new BankNote(50,"Baht");
+    	BankNote note1 = new BankNote(20,"pound",serialNumber);
+    	BankNote note2 = new BankNote(50,"Baht",serialNumber);
   
     	purse.insert(coin1);
     	purse.insert(coin2);

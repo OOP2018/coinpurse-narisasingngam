@@ -21,6 +21,7 @@ public class ConsoleDialog {
 	// The dialog receives a Purse object by dependency injection (as parameter to constructor)
     // so don't create a Purse here.
     private Purse purse;
+    private long serialNumber = 1000000;
     
     /** 
      * Initialize a new Purse dialog.
@@ -126,7 +127,7 @@ public class ConsoleDialog {
     /** Make a Coin (or BankNote or whatever) using requested value. */
     private Valuable makeMoney(double value) {
     	if(value >= 20){
-    		return new BankNote(value, CURRENCY);
+    		return new BankNote(value, CURRENCY,serialNumber);
     	}
     	return new Coin(value, CURRENCY);
     	

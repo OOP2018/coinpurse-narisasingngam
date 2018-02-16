@@ -11,6 +11,7 @@ import java.util.List;
  */
 
 public class MoneyUtil {
+	private static long serialNumber = 1000000;
 
 	/**
 	 * To print the Coin in List
@@ -57,7 +58,7 @@ public class MoneyUtil {
 		valueable.add(new Coin (30.0,"pound"));
 		valueable.add(new Coin (1.0,"Bath"));
 		valueable.add(new Coin (0.5,"Bath"));
-		valueable.add(new BankNote (30.0,"Bath"));
+		valueable.add(new BankNote (30.0,"Bath",serialNumber));
 		printCoin( valueable );
 		sortCoins(valueable);
 		
