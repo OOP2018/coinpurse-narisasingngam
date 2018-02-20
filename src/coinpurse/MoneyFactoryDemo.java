@@ -1,6 +1,6 @@
 package coinpurse;
 /**
- * 
+ * This class for writing MoneyFactory Demo
  * @author Narisa Singngam
  *
  */

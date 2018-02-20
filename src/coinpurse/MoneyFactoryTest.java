@@ -1,7 +1,11 @@
 package coinpurse;
 import static org.junit.Assert.*;
-
 import org.junit.Test;
+/**
+ * Test MoneyFactory
+ * @author Narisa Singngam
+ *
+ */
 public class MoneyFactoryTest {
 	
 	@Test
