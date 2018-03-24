@@ -5,9 +5,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import coinpurse.strategy.GreedyWithdraw;
+import coinpurse.strategy.RecursiveWithdraw;
+import coinpurse.strategy.WithdrawStrategy;
+
 /**
- * A  purse contains List of Valuable. You can insert money, withdraw money, check the
- * balance, and check if the purse is full.
+ * A purse contains List of Valuable. You can insert money, withdraw money,
+ * check the balance, and check if the purse is full.
  * 
  * @author Narisa Singngam
  */
@@ -16,6 +20,7 @@ public class Purse {
 
 	private List<Valuable> money;
 	private Comparator<Valuable> comp = new ValueComparator();
+	private WithdrawStrategy strategy;
 
 	/**
 	 * Capacity is maximum number of items the purse can hold. Capacity is set
@@ -32,6 +37,12 @@ public class Purse {
 	public Purse(int capacity) {
 		this.capacity = capacity;
 		money = new ArrayList<Valuable>(capacity);
+		// strategy = new RecursiveWithdraw();
+		setWithdraw(new GreedyWithdraw());
+	}
+
+	public void setWithdraw(WithdrawStrategy strategy) {
+		this.strategy = strategy;
 	}
 
 	/**
@@ -81,8 +92,8 @@ public class Purse {
 	}
 
 	/**
-	 * Insert a value into the purse. The value is only inserted if the purse has
-	 * space for it and the value has positive value. No worthless coins!
+	 * Insert a value into the purse. The value is only inserted if the purse
+	 * has space for it and the value has positive value. No worthless coins!
 	 * 
 	 * @param value
 	 *            is a Valuable object to insert into purse
@@ -98,47 +109,29 @@ public class Purse {
 	}
 
 	/**
-	 * Withdraw the amount, using only items that have the same currency as the parameter(amount).
-	 * amount must not be null and amount.
+	 * Withdraw the amount, using only items that have the same currency as the
+	 * parameter(amount). amount must not be null and amount.
 	 * 
 	 * @param amount
 	 *            is the amount to withdraw
 	 * @return array of Money objects for money withdrawn, or null if cannot
 	 *         withdraw requested amount.
 	 */
-	
+
 	public Valuable[] withdraw(Valuable amount) {
-		double amountV = amount.getValue();
-		if(amount == null) return null;
-		if (amountV < 0 || amountV > getBalance()) return null;
-		
-		Collections.sort(money,comp);
-		Collections.reverse(money);
-		List<Valuable> temp = new ArrayList<Valuable>();
-		
-		List<Valuable> tempCurrency = new ArrayList<Valuable>();
-		for(Valuable v : money){
-			if(v.getCurrency().equals(amount.getCurrency())){
-				tempCurrency.add(v);
-			}
-		}
+		List<Valuable> filtered = MoneyUtil.filterByCurrency(money, amount.getCurrency());
+		List<Valuable> withdraw = strategy.withdraw(amount, filtered);
 
-		for (Valuable value : tempCurrency) {
-			if (value.getValue() <= amountV) {
-				amountV -= value.getValue();
-				temp.add(value);
-			}
-		}
+		if (withdraw == null)
+			return null;
 
-		if (amountV != 0) return null;
+		for (Valuable value : withdraw)
+			money.remove(value);
 
-		for (Valuable value : temp) money.remove(value);
-		
-
-		Valuable[] array = new Valuable[temp.size()];
-		return temp.toArray(array);
+		Valuable[] array = new Valuable[withdraw.size()];
+		return withdraw.toArray(array);
 	}
-	
+
 	/**
 	 * Withdraw amount using the default currency, which is "Bath".
 	 * 
@@ -148,9 +141,9 @@ public class Purse {
 	 *         withdraw requested amount.
 	 */
 	public Valuable[] withdraw(double amount) {
-		Money moneyA = new Money(amount,"Baht");
+		Money moneyA = new Money(amount, "Baht");
 		return withdraw(moneyA);
-		
+
 	}
 
 	/**

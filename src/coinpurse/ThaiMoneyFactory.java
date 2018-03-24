@@ -15,7 +15,7 @@ public class ThaiMoneyFactory extends MoneyFactory {
 	 * @return Coin and BankNote in Baht
 	 */
 	@Override
-	public Valuable createMoney(double value) throws IllegalArgumentException{
+	public Valuable createMoney(double value) {
 		if (value < 20) {
 			for (int i = 0; i < 4; i++) {
 				if (v[i] == value)

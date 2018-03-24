@@ -13,7 +13,7 @@ public class MalayMoneyFactory extends MoneyFactory {
 	 * @return Coin and BankNote in Ringgit
 	 */
 	@Override
-	public Valuable createMoney(double value) throws IllegalArgumentException{
+	public Valuable createMoney(double value){
 	
 		if (value < 1) {
 			for (int i = 0; i < 4; i++) {

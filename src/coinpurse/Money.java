@@ -19,9 +19,9 @@ public class Money implements Valuable{
 	 * @param currency of money
 	 */
 	public Money(double value, String currency) {
-		if (value >= 0) {
+//		if (value >= 0) {
 			this.value = value;
-		}
+//		}
 		this.currency = currency;
 	}
 
@@ -75,13 +75,7 @@ public class Money implements Valuable{
 			return false;
 		}
 		Money other = (Money) arg;
-		if (this.getValue() != other.getValue()) {
-			return false;
-		}
-		if (!this.getCurrency().equals(other.getCurrency())) {
-			return false;
-		}
-		return true;
+		return this.getValue() == other.getValue() && this.getCurrency().equals(other.getCurrency());
 	}
 	
 	
