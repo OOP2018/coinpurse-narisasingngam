@@ -6,6 +6,11 @@ import java.util.List;
 import coinpurse.Money;
 import coinpurse.Valuable;
 
+/**
+ * Withdraw money in purse with recursive strategy.
+ * @author Narisa Singngam
+ *
+ */
 public class RecursiveWithdraw implements WithdrawStrategy{
 
 	@Override
