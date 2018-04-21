@@ -10,6 +10,7 @@ import coinpurse.ValueComparator;
 
 /**
  * Withdraw money in purse.
+ * 
  * @author Narisa Singngam
  *
  */
@@ -21,36 +22,41 @@ public class GreedyWithdraw implements WithdrawStrategy {
 	public List<Valuable> withdraw(Valuable amount, List<Valuable> valuable) {
 
 		double getBalance = 0;
-		double amountV = amount.getValue();
+		double amountD = amount.getValue();
+
 		for (Valuable value : valuable) {
 			getBalance += value.getValue();
 		}
+
 		if (amount == null)
 			return null;
-		if (amountV < 0 || amountV > getBalance)
+		if (amountD < 0 || amountD > getBalance)
 			return null;
 
 		Collections.sort(valuable, comp);
 		Collections.reverse(valuable);
-		List<Valuable> temp = new ArrayList<Valuable>();
 
 		List<Valuable> tempCurrency = new ArrayList<Valuable>();
-		for (Valuable v : valuable) {
-			if (v.getCurrency().equals(amount.getCurrency())) {
-				tempCurrency.add(v);
+		List<Valuable> temp = new ArrayList<Valuable>();
+
+		for (Valuable value : valuable) {
+			if (value.getCurrency().equals(amount.getCurrency())) {
+				tempCurrency.add(value);
 			}
 		}
 
 		for (Valuable value : tempCurrency) {
-			if (value.getValue() <= amountV) {
-				amountV -= value.getValue();
+			if (value.getValue() <= amountD) {
+				amountD -= value.getValue();
 				temp.add(value);
 			}
+
 		}
 
-		if (amountV != 0)
+		if (amountD != 0)
 			return null;
 		return temp;
+		
 
 	}
 
