@@ -33,10 +33,10 @@ public class MoneyUtil {
 	}
 
 	/**
-	 * To print the Coin in List
+	 * To print the objects in List
 	 * 
 	 * @param value
-	 *            is a list in Coin
+	 *            is a list in the objects
 	 */
 	public static void printMoney(List<? extends Valuable> value) {
 		for (Valuable values : value) {
@@ -45,12 +45,12 @@ public class MoneyUtil {
 	}
 
 	/**
-	 * To filter the coin that contain the same currency
+	 * To filter the objects that contain the same currency
 	 * 
 	 * @param value
 	 *            is the object
 	 * @param currency
-	 * @return the list of the Coin which have same currency.
+	 * @return the list of the objects which have same currency.
 	 */
 
 	public static <E extends Valuable> List<E> filterByCurrency(List<E> value, String currency) {
@@ -67,7 +67,7 @@ public class MoneyUtil {
 	 * Sort any list of comparable object
 	 * 
 	 * @param value
-	 *            is a list in Coin
+	 *            is a list in the objects
 	 */
 	public static void sortMoney(List<? extends Valuable> value) {
 		Comparator<Valuable> comp = new ValueComparator();
@@ -82,7 +82,7 @@ public class MoneyUtil {
 		valueable.add(new Coin(30.0, "pound"));
 		valueable.add(new Coin(1.0, "Bath"));
 		valueable.add(new Coin(0.5, "Bath"));
-		// valueable.add(new BankNote (30.0,"Bath",serialNumber));
+//		valueable.add(new BankNote (30.0,"Bath",serialNumber));
 		printMoney(valueable);
 		sortMoney(valueable);
 		Money m1 = new BankNote(100, "Baht", serialNumber);
